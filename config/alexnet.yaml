@@ -1,0 +1,7 @@
+_BASE_: "./Base_ubk_cfg.yaml"
+MODEL:
+  NAME: "alexnet_1d"
+TRAIN:
+  TRAINER: "ConvTrainer"
+  MAX_EPOCH: 50
+  OUTPUT_DIR: "results/alexnet_1d/"

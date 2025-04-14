@@ -1,0 +1,22 @@
+_BASE_: "./Base_ubk_cfg.yaml"
+MODEL:
+  NAME: "transformer"
+  DROPOUT: 0.1
+  TRANSFORMER:
+    CHANNELS: 200
+    D_MODEL: 512
+    N_HEAD: 4
+    ENC_LAYERS: 2
+    DEC_LAYERS: 1
+    DIM_FEEDFORWARD: 256
+    ACTIVATION: "relu"
+    OUTPUT_ATTENTION: False
+SOLVER:
+  LR_INIT: 0.01
+  MILESTONE: [100, 150]
+TRAIN:
+  TRAINER: "TransformerTrainer"
+  MAX_EPOCH: 10
+  LOG_INTERVAL: 1
+  SAVE_LAST: True
+  OUTPUT_DIR: "results/transformer/"

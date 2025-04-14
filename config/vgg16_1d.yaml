@@ -1,0 +1,7 @@
+_BASE_: "./Base_ubk_cfg.yaml"
+MODEL:
+  NAME: "vgg16_bn_1d"
+TRAIN:
+  TRAINER: "ConvTrainer"
+  MAX_EPOCH: 50
+  OUTPUT_DIR: "results/vgg16_1d/"

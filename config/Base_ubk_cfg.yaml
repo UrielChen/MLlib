@@ -1,0 +1,17 @@
+DATA_LOADER:
+  NAME: "ubk_dataloader"
+  TRAIN_BATCH_SIZE: 512
+  NUM_WORKERS: 6
+LOSS:
+  NAME: "cross_entropy_loss"
+SOLVER:
+  NAME: "sgd"
+  SCHEDULER: "multi_step_scale"
+  LR_INIT: 0.001
+  WEIGHT_DECAY: 0.0005
+  MOMENTUM: 0.9
+  MILESTONE: [100, 120]
+DATA:
+  TRAIN_DATA: "./dataset/demo/train_sample.npy"
+  VALID_DATA: "./dataset/demo/valid_sample.npy"
+  TEST_DATA: "./dataset/demo/test_sample.npy"

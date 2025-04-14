@@ -1,0 +1,11 @@
+_BASE_: "./Base_ubk_cfg.yaml"
+MODEL:
+  NAME: "alexnet_1d"
+TRAIN:
+  TRAINER: "ConvTrainer"
+  MAX_EPOCH: 50
+  OUTPUT_DIR: "results/alexnet_1d/"
+DATA:
+  TRAIN_DATA: "./dataset/demo/train_sample.npy"
+  VALID_DATA: "./dataset/demo/valid_sample.npy"
+  TEST_DATA: "./dataset/demo/test_sample.npy"

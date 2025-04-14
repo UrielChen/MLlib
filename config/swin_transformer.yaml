@@ -1,0 +1,16 @@
+_BASE_: "./Base_ubk_cfg.yaml"
+MODEL:
+  NAME: "swin_transformer_model"
+DATA_LOADER:
+  NAME: "ubk_dataloader"
+  TRAIN_BATCH_SIZE: 16
+  NUM_WORKERS: 4
+SOLVER:
+  LR_INIT: 0.01
+  MILESTONE: [100, 150]
+TRAIN:
+  TRAINER: "SwinTransformerTrainer"
+  MAX_EPOCH: 30
+  LOG_INTERVAL: 300
+  SAVE_LAST: True
+  OUTPUT_DIR: "results/swin_transformer/"
