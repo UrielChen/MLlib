@@ -27,7 +27,7 @@ python run.py -c config/alexnet_demo.yaml
 
 ### Training
 ```shell
-# cd path/to/UBKProj
+# cd path/to/MLlib
 python run.py --config-file config/vgg16_1d.yaml 
 ```
 
