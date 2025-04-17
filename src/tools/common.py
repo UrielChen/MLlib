@@ -59,6 +59,11 @@ def parse_args():
         help="only test model on specified weights",
     )
     parser.add_argument(
+        "--train-only",
+        action="store_true",  # todo
+        help="only train model on specified weights",
+    )
+    parser.add_argument(
         '--lr',
         type=float,
         default=None,

@@ -19,8 +19,12 @@ def main():
     runner = ExpRunner(cfg)
     if args.test_only:
         return runner.test()
+    if args.train_only:
+        return runner.train()
     runner.run()
 
 
 if __name__ == "__main__":
+    import sys
+    sys.argv = ["run.py", "-c", "config/phil_nn_2.yaml", "--train-only"]
     main()

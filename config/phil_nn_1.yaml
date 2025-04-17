@@ -1,0 +1,24 @@
+_BASE_: "./Base_phil_cfg.yaml"
+MODEL:
+  NAME: "phil_nn_1"
+  INPUT_DIM: 10
+TRAIN:
+  TRAINER: "PhilNNTrainer"
+  MAX_EPOCH: 15
+  OUTPUT_DIR: "results/phil_rp/nn_1/"
+  TRAIN_ONLY: True
+  LOG_INTERVAL: 500
+  IS_VALIDATE: True
+  VALID_INTERVAL: 5
+  SAVE_LAST: True
+  # RESUME: "/Users/phil/PythonProjects/Research/MLlib/results/phil_rp/nn_1/04-16_17-58/checkpoint_last.pkl"
+  RESUME_EPOCH: "restart"
+  # RESET_LR: True # phil_todo this is important if we want to pretraining - fine tuning.
+DATA:
+  TRAIN_DATA: "./dataset/phil_rp/synthetic_data/train_sample.npy"
+  VALID_DATA: "./dataset/phil_rp/synthetic_data/valid_sample.npy"
+  TEST_DATA: "./dataset/phil_rp/synthetic_data/test_sample.npy"
+SOLVER:
+  SCHEDULER: "multi_step_scale"  # multi_step_scale
+  PATIENCE: 5
+  MILESTONE: [5, 8, 12]

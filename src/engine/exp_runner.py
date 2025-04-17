@@ -73,8 +73,15 @@ class ExpRunner(Constructor):
         # cfg = self.cfg.TRAIN
         if cfg.RESUME:
             self.model, self.optimizer, epoch = resume_training(cfg.RESUME, self.model, self.optimizer)
-            cfg.START_EPOCH = epoch
+            if cfg.RESUME_EPOCH == "resume":
+                cfg.START_EPOCH = epoch
+            elif cfg.RESUME_EPOCH == "restart":  # this is for pretraining and fine-tuning schema
+                cfg.START_EPOCH = 0
+            else:
+                raise ValueError(cfg.RESUME_EPOCH)  # phil_todo
+
             self.logger.info(f"resume training from {cfg.RESUME}")
+
         if self.cfg.SOLVER.RESET_LR:
             self.logger.info("change learning rate form [{}] to [{}]".format(
                 self.optimizer.param_groups[0]["lr"],
@@ -86,7 +93,7 @@ class ExpRunner(Constructor):
         for epoch in range(cfg.START_EPOCH, cfg.MAX_EPOCH):
             self.trainer.train(self.data_loader["train"], self.model, self.loss_f, self.optimizer, epoch)
 
-            if epoch % cfg.VALID_INTERVAL == 0:
+            if cfg.IS_VALIDATE and epoch % cfg.VALID_INTERVAL == 0:
                 self.trainer.valid(self.data_loader["valid"], self.model, self.loss_f, epoch)
 
             self.scheduler.step()

@@ -1,10 +1,10 @@
-import torch
-from torch.utils.data import Dataset, DataLoader, WeightedRandomSampler
-import numpy as np
+from torch.utils.data import Dataset, DataLoader
 from .build import DATA_LOADER_REGISTRY
+import numpy as np
+import torch
 
 
-class UBKData(Dataset):
+class RegData(Dataset):
 
     def __init__(self, cfg, mode):
         if mode == "train":
@@ -23,31 +23,24 @@ class UBKData(Dataset):
         return len(self.data)
 
     def __getitem__(self, idx):
-        label = self.data[idx, -1].clip(min=0).type(torch.LongTensor)
+        target = self.data[idx, -1]
 
         sample = {
             "data": self.data[idx, :-1],
-            "label": label,
+            "target": target,
         }
         return sample
 
-    def get_labels(self):
-        # todo this method has been used? need to check, questioning. phil
-        return self.data[:, -1]
-
 
 @DATA_LOADER_REGISTRY.register()
-def ubk_dataloader(cfg, mode="train"):
-    from torchsampler import ImbalancedDatasetSampler
+def phil_dataloader(cfg, mode="train"):
 
-    sampler = None
     if mode == "train":
-        dataset = UBKData(cfg, mode)
-        sampler = ImbalancedDatasetSampler(dataset)
+        dataset = RegData(cfg, mode)
     elif mode == "valid":
-        dataset = UBKData(cfg, mode)
+        dataset = RegData(cfg, mode)
     elif mode == "test":
-        dataset = UBKData(cfg, mode)
+        dataset = RegData(cfg, mode)
     else:
         raise ValueError(
             "mode must be one of 'train' or 'valid' or test' "
@@ -57,6 +50,5 @@ def ubk_dataloader(cfg, mode="train"):
         dataset,
         batch_size=cfg.DATA_LOADER.TRAIN_BATCH_SIZE,
         num_workers=cfg.DATA_LOADER.NUM_WORKERS,
-        sampler=sampler,
     )
     return data_loader

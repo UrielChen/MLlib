@@ -53,6 +53,7 @@ _C.MODEL.DIM_LIST = None
 _C.MODEL.CHANNELS = 1
 _C.MODEL.HEIGHT = 1
 _C.MODEL.WIDTH = 1
+_C.MODEL.INPUT_DIM = 10  # phil_todo
 
 _C.MODEL.TRANSFORMER = CfgNode()
 _C.MODEL.TRANSFORMER.CHANNELS = 10
@@ -82,6 +83,7 @@ _C.SOLVER.FACTOR = 0.1
 _C.SOLVER.MILESTONE = [200, 280]
 _C.SOLVER.T_MAX = 10
 _C.SOLVER.ETA_MIN = 0.0001
+_C.SOLVER.PATIENCE = 5
 
 # ------------------------------------------- step 6:  train config node -----------------------------------------------
 _C.TRAIN = CfgNode()
@@ -90,10 +92,13 @@ _C.TRAIN.START_EPOCH = 0
 _C.TRAIN.MAX_EPOCH = 300
 _C.TRAIN.PRE_TRAINED_MODEL = None
 _C.TRAIN.RESUME = ""
+_C.TRAIN.RESUME_EPOCH = "resume"
 _C.TRAIN.LOG_INTERVAL = 1
+_C.TRAIN.IS_VALIDATE = True
 _C.TRAIN.VALID_INTERVAL = 1
 _C.TRAIN.SAVE_LAST = False
 _C.TRAIN.OUTPUT_DIR = "results"
+_C.TRAIN.TRAIN_ONLY = False # phil_todo
 # ------------------------------------------- step 7:  test config node ------------------------------------------------
 _C.TEST = CfgNode()
 _C.TEST.TEST_ONLY = False

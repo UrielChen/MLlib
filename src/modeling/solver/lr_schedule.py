@@ -1,6 +1,12 @@
 import torch.optim as optim
 from .build import SOLVER_REGISTRY
 
+@SOLVER_REGISTRY.register()
+def reduce_lr_on_plateau(cfg, optimizer):
+    return optim.lr_scheduler.ReduceLROnPlateau(
+        optimizer, mode='min',factor=cfg.SOLVER.FACTOR, patience=cfg.SOLVER.PATIENCE, verbose=True
+    )
+
 
 @SOLVER_REGISTRY.register()
 def multi_step_scale(cfg, optimizer):
