@@ -52,8 +52,8 @@ class SimpleRegressionTrainer(Trainer):
             optimizer.step()
 
             loss_list.append(loss.item())
-            mae_list.append(mean_absolute_error(preds.detach().numpy(), targets.detach().numpy()))
-            mse_list.append(mean_squared_error(preds.detach().numpy(), targets.detach().numpy()))
+            mae_list.append(mean_absolute_error(preds.cpu().detach().numpy(), targets.cpu().detach().numpy()))
+            mse_list.append(mean_squared_error(preds.cpu().detach().numpy(), targets.cpu().detach().numpy()))
             if i % self.cfg.LOG_INTERVAL == self.cfg.LOG_INTERVAL - 1:
                 self.logger.info(
                     f"Train: Epoch[{epoch_idx+1:03d}/{self.cfg.MAX_EPOCH}] "
@@ -75,10 +75,10 @@ class SimpleRegressionTrainer(Trainer):
                 loss = loss_func(preds, targets)
                 loss_batch_list.append(loss.item())
 
-                mae_batch = mean_absolute_error(preds.detach().numpy(), targets.detach().numpy())
+                mae_batch = mean_absolute_error(preds.cpu().detach().numpy(), targets.cpu().detach().numpy())
                 mae_batch_list.append(mae_batch)
 
-                mse_batch = mean_squared_error(preds.detach().numpy(), targets.detach().numpy())
+                mse_batch = mean_squared_error(preds.cpu().detach().numpy(), targets.cpu().detach().numpy())
                 mse_batch_list.append(mse_batch)
 
                 # all_preds.append(preds.cpu())  # phil_todo, here i store the validation result
