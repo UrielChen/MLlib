@@ -279,20 +279,6 @@ class TransformerTrainer(SimpleTrainer):
 
 
 @TRAINER_REGISTRY.register()
-class SwinTransformerTrainer(SimpleTrainer):
-
-    def data_fmt(self, data):
-        for k, v in data.items():
-            data[k] = v.to(self.device)
-        data_in, labels = data["data"], data["label"]
-        bs, dim = data_in.shape
-        tmp = torch.zeros(bs, 224).to(self.device)
-        tmp[:, :194] = data_in
-        data_in = tmp.reshape(bs, 1, 1, 224)
-        data_in = data_in.repeat(1, 1, 224, 1)
-        return (data_in,), labels
-
-@TRAINER_REGISTRY.register()
 class PhilNNTrainer(SimpleRegressionTrainer):
     def data_fmt(self, data):
         for k, v in data.items():
