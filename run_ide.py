@@ -25,4 +25,6 @@ def main():
 
 
 if __name__ == "__main__":
+    import sys
+    sys.argv = ["run.py", "-c", "config/phil_nn_light.yaml", "--train-only"]
     main()
