@@ -1,5 +1,5 @@
 DATA_LOADER:
-  NAME: "phil_dataloader"
+  NAME: "phil_ts_dataloader"
   TRAIN_BATCH_SIZE: 1024
   NUM_WORKERS: 2
 LOSS:

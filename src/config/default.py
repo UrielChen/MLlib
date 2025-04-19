@@ -25,6 +25,12 @@ _C.DATA.VALID_DATA_SHAPE = None
 _C.DATA.TEST_DATA = "./dataset/ukb_array_test.npy"
 _C.DATA.TEST_DATA_SHAPE = None
 
+_C.DATA.FINE_TUNING_MAIN_DATA = ""
+_C.DATA.FINE_TUNING_LOAD_MODE = ""
+_C.DATA.TRAIN_DATA_DIR = ""
+_C.DATA.VALID_DATA_DIR = ""
+_C.DATA.TEST_DATA_DIR = ""
+
 # ------------------------------------------ step 2 : dataloader config node -------------------------------------------
 _C.DATA_LOADER = CfgNode()
 # name of dataloader build function
@@ -110,3 +116,7 @@ _C.TEST.COMPUTE_PCC = True
 _C.TEST.COMPUTE_CCC = True
 _C.TEST.SAVE_DATASET_OUTPUT = ""
 # ======================================================================================================================
+_C.TS_FINE_TUNING = CfgNode()
+_C.TS_FINE_TUNING.START = ""
+_C.TS_FINE_TUNING.END = ""
+_C.TS_FINE_TUNING.DATE_LIST = ""
