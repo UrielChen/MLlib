@@ -65,6 +65,7 @@ class SimpleRegressionTrainer(Trainer):
             self.clt.record_train_mse(mse_list)
 
     def valid(self, data_loader, model, loss_func, epoch_idx):
+        # todo early stopping logic
         model.eval()
         loss_batch_list, mae_batch_list, mse_batch_list = [], [], []
         all_preds, all_targets = [], []

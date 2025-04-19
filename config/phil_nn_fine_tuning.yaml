@@ -1,0 +1,24 @@
+_BASE_: "./Base_phil_cfg.yaml"
+MODEL:
+  NAME: "phil_nn_2"
+  INPUT_DIM: 10
+  DROPOUT: 0.2
+TRAIN:
+  TRAINER: "PhilNNTrainer"
+  MAX_EPOCH: 10
+  OUTPUT_DIR: "results/phil_rp/fine_tuning"
+  TRAIN_ONLY: True
+  LOG_INTERVAL: 500
+  IS_VALIDATE: True
+  VALID_INTERVAL: 5
+  LOAD_PRETRAIN: True
+  PRETRAINING_PATH: "results/phil_rp/pretraining/main_pretraining.pkl"
+DATA:
+  TRAIN_DATA: "./dataset/phil_rp/synthetic_data/train_sample.npy"
+  VALID_DATA: "./dataset/phil_rp/synthetic_data/valid_sample.npy"
+  TEST_DATA: "./dataset/phil_rp/synthetic_data/test_sample.npy"
+SOLVER:
+  SCHEDULER: "multi_step_scale"  # multi_step_scale
+  PATIENCE: 5
+  MILESTONE: [3, 8]
+  LR_INIT: 0.00001

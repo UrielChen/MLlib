@@ -6,7 +6,7 @@ from src.modeling.loss.build import build_loss_func
 from src.modeling.solver.build import build_solver, build_scheduler
 from src.engine.build import build_trainer
 from src.evaluate.summary import TrainSummary
-from src.checkpoint.save import save_model, resume_training, load_model
+from src.checkpoint.save import save_model, resume_training, load_model, load_pretrained
 from src.tools.logger import make_logger
 
 
@@ -81,6 +81,8 @@ class ExpRunner(Constructor):
                 raise ValueError(cfg.RESUME_EPOCH)  # phil_todo
 
             self.logger.info(f"resume training from {cfg.RESUME}")
+        if cfg.LOAD_PRETRAIN:  # phil_todo test it!
+            self.model = load_pretrained(cfg.PRETRAINING_PATH, self.model)
 
         if self.cfg.SOLVER.RESET_LR:
             self.logger.info("change learning rate form [{}] to [{}]".format(
