@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from datetime import datetime
 from src.data.build import build_dataloader
 from src.modeling.network.build import build_model
@@ -6,9 +7,10 @@ from src.modeling.loss.build import build_loss_func
 from src.modeling.solver.build import build_solver, build_scheduler
 from src.engine.build import build_trainer
 from src.evaluate.summary import TrainSummary
-from src.checkpoint.save import save_model, resume_training, load_model, load_pretrained
+from src.checkpoint.save import resume_training, load_model, load_pretrained, save_ts_model, save_ts_pred
 from src.tools.logger import make_logger
 import numpy as np
+import pandas as pd
 
 
 class FTConstructor:
@@ -67,8 +69,11 @@ class TSFineTuningRunner(FTConstructor):
     def __init__(self, cfg):
         super().__init__(cfg)
         self.logger, self.log_dir = make_logger(cfg.TRAIN.OUTPUT_DIR)
+        self.pred_dir = Path(self.log_dir, "pred_dir")
+        self.model_dir = Path(self.log_dir, "model_dir")
         self.build()
         self.logger.info(cfg)
+        self.total_pred, self.total_targets = None, None
 
     def before_train(self, cfg, date):
         if cfg.RESUME:
@@ -95,7 +100,6 @@ class TSFineTuningRunner(FTConstructor):
         if cfg.IS_VALIDATE:
             self.data_loader["valid"].dataset.update(date)
 
-
     def train_epochs(self, cfg, date):
         for epoch in range(cfg.START_EPOCH, cfg.MAX_EPOCH):
             self.trainer.train(self.data_loader["train"], self.model, self.loss_f, self.optimizer, epoch)
@@ -106,34 +110,36 @@ class TSFineTuningRunner(FTConstructor):
             self.scheduler.step()
 
             if self.collector.model_save and epoch % cfg.VALID_INTERVAL == 0:
-                save_model(epoch, self.collector.best_valid_acc, self.model, self.optimizer, self.log_dir, cfg)
+                self.model_dir.mkdir(parents=True, exist_ok=True)
+
+                save_ts_model(epoch, self.collector.best_valid_acc, self.model, self.optimizer, self.model_dir, date)
                 self.collector.update_best_epoch(epoch)
             if self.cfg.TRAIN.SAVE_LAST and epoch == (cfg.MAX_EPOCH - 1):
-                save_model(epoch, self.collector.best_valid_acc, self.model, self.optimizer, self.log_dir, cfg)
+                self.model_dir.mkdir(parents=True, exist_ok=True)
+                save_ts_model(epoch, self.collector.best_valid_acc, self.model, self.optimizer, self.model_dir, date)
 
     def after_train(self, cfg, date):
         # cfg = self.cfg.TRAIN
         # self.collector.draw_epo_info(log_dir=self.log_dir)
         self.logger.info(
-            "{} done, best acc: {} in :{}".format(
+            "Training on {} done at {}, best mse: {} in :{}".format(
+                date,
                 datetime.strftime(datetime.now(), '%m-%d_%H-%M'),
-                self.collector.best_valid_acc,
+                self.collector.best_valid_mse,
                 self.collector.best_epoch,
             )
         )
 
-    def train(self, date):
-        cfg = self.cfg.TRAIN
-        self.before_train(cfg, date)
-        self.train_epochs(cfg, date)
-        self.after_train(cfg, date)
-
-    def test(self, date, weight=None):
-        self.logger.info("Test only mode")
-        cfg = self.cfg.TEST
-        # cfg.WEIGHT = weight if weight else cfg.WEIGHT
-
-        if cfg.WEIGHT:
+    def before_test(self, cfg, date):
+        ##############
+        # Load Model #
+        ##############
+        self.logger.info(f"On Test, date: {date}")
+        if cfg.LOAD_TODAY_MODEL:
+            weight_file = os.path.join(self.model_dir, f"{date}.pkl")
+            self.logger.info(f"test with model on date {date} at {weight_file}")
+            self.model = load_model(self.model, weight_file)
+        elif cfg.WEIGHT:
             self.model = load_model(self.model, cfg.WEIGHT)
         else:
             try:
@@ -148,10 +154,47 @@ class TSFineTuningRunner(FTConstructor):
             self.logger.info(f"test with model {weight_file}")
             self.model = load_model(self.model, weight_file)
 
-        acc_avg, uar = self.trainer.test(
+        self.pred_dir.mkdir(parents=True, exist_ok=True)
+        ####################
+        # Update Test Data #
+        ####################
+        self.data_loader["test"].dataset.update(date)
+        return
+
+    def on_test(self, cfg, date):
+        curr_preds, curr_targets = self.trainer.test(
             self.data_loader["test"], self.model
         )
-        self.logger.info("acc: {} ; uar: {}".format(acc_avg, uar))
+        save_ts_pred(curr_preds, curr_targets, self.pred_dir, date)
+
+        if self.total_pred is None:
+            self.total_pred = curr_preds
+            self.total_targets = curr_targets
+        else:
+            self.total_pred = np.concatenate([self.total_pred, curr_preds])
+            self.total_targets = np.concatenate([self.total_targets, curr_targets])
+
+        mae = np.mean(np.abs(curr_preds - curr_targets))
+        mse = np.mean((curr_preds - curr_targets) ** 2)
+        self.logger.info(f"Test on date: {date} mae: {mae} ; mse: {mse}")
+        return
+
+    def after_test(self, cfg, date):
+
+        return
+
+    def train(self, date):
+        cfg = self.cfg.TRAIN
+        self.before_train(cfg, date)
+        self.train_epochs(cfg, date)
+        self.after_train(cfg, date)
+
+    def test(self, date, weight=None):
+        cfg = self.cfg.TEST
+        # cfg.WEIGHT = weight if weight else cfg.WEIGHT
+        self.before_test(cfg, date)
+        self.on_test(cfg, date)
+        self.after_test(cfg, date)
         return
 
     def run(self, train_only=False, test_only=False):
@@ -169,4 +212,8 @@ class TSFineTuningRunner(FTConstructor):
                 self.test(date)
             else:
                 raise ValueError()
+        np.save(Path(self.log_dir, "total_pred.npy"), self.total_pred)
+        np.save(Path(self.log_dir, "total_targets.npy"), self.total_targets)
 
+
+# todo, everyday, save a model(train), load this model(test) and perform test.

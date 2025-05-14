@@ -129,10 +129,7 @@ class SimpleRegressionTrainer(Trainer):
         total_preds = torch.cat(all_preds).numpy()
         total_targets = torch.cat(all_targets).numpy()
 
-        mae = np.mean(np.abs(total_preds - total_targets))
-        mse = np.mean((total_preds - total_targets) ** 2)
-
-        return round(mae, 4), round(mse, 4)
+        return total_preds, total_targets
 
     def data_fmt(self, data):
         for k, v in data.items():

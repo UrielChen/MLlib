@@ -26,5 +26,5 @@ def main():
 
 if __name__ == "__main__":
     import sys
-    sys.argv = ["run.py", "-c", "config/phil_nn_fine_tuning_time_series.yaml", "--train-only"]
+    sys.argv = ["run.py", "-c", "config/phil_rp/monthly_k_5.yaml"]
     main()

@@ -1,5 +1,7 @@
 import os
 import torch
+import numpy as np
+from pathlib import Path
 
 
 def save_model(epoch, best_acc, model, optimizer, output_dir, cfg):
@@ -15,6 +17,27 @@ def save_model(epoch, best_acc, model, optimizer, output_dir, cfg):
     pkl_name = "checkpoint_{}.pkl".format(epoch) if epoch != (cfg.MAX_EPOCH - 1) else "checkpoint_last.pkl"
     path_checkpoint = os.path.join(output_dir, pkl_name)
     torch.save(checkpoint, path_checkpoint)
+
+
+def save_ts_model(epoch, best_acc, model, optimizer, output_dir, date):
+    # phil_todo: need to store and load scheduler?
+    if isinstance(optimizer, list):
+        optimizer = optimizer[1]  # for cr net
+    checkpoint = {
+        "model_state_dict": model.state_dict(),
+        "optimizer_state_dict": optimizer.state_dict(),
+        "epoch": epoch,
+        "best_acc": best_acc
+    }
+    pkl_name = f"{date}.pkl"
+    path_checkpoint = os.path.join(output_dir, pkl_name)
+    torch.save(checkpoint, path_checkpoint)
+
+
+def save_ts_pred(curr_pred, curr_targets, output_dir, date):
+    np.save(Path(output_dir, f"{date}_pred.npy"), curr_pred)
+    np.save(Path(output_dir, f"{date}_target.npy"), curr_targets)
+    return
 
 
 def resume_training(checkpoint_path, model, optimizer):
