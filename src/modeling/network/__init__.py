@@ -4,4 +4,4 @@ from .renet18_1d import resnet18_1d
 from .transformer.transformer import transformer
 from .vgg16_1d import vgg16_bn_1d
 from .phil_nn_1 import phil_nn_1
-from .phil_nn_2 import phil_nn_2
+from .phil_nn_2 import phil_nn_2, phil_rp_shallow_network_1

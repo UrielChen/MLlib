@@ -171,8 +171,8 @@ class TSFineTuningRunner(FTConstructor):
             self.total_pred = curr_preds
             self.total_targets = curr_targets
         else:
-            self.total_pred = np.concatenate([self.total_pred, curr_preds])
-            self.total_targets = np.concatenate([self.total_targets, curr_targets])
+            self.total_pred = np.concatenate([self.total_pred, curr_preds], axis=0)  # todo wrong direction
+            self.total_targets = np.concatenate([self.total_targets, curr_targets], axis=0)
 
         mae = np.mean(np.abs(curr_preds - curr_targets))
         mse = np.mean((curr_preds - curr_targets) ** 2)

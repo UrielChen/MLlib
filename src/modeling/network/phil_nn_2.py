@@ -43,3 +43,12 @@ def phil_nn_2(cfg=None, **kwargs):
     dropout = cfg.MODEL.DROPOUT if cfg else kwargs.get("DROPOUT")
     model = DeepResNetMLP(input_dim=input_dim, dropout=dropout)
     return model.to(device)
+
+@NETWORK_REGISTRY.register()
+def phil_rp_shallow_network_1(cfg=None, **kwargs):
+    input_dim = cfg.MODEL.INPUT_DIM if cfg else kwargs.get("INPUT_DIM")
+    dropout = cfg.MODEL.DROPOUT if cfg else kwargs.get("DROPOUT")
+    num_blocks = cfg.MODEL.NUM_BLOCKS if cfg else kwargs.get("NUM_BLOCKS")
+    hidden_dim = cfg.MODEL.HIDDEN_DIM if cfg else kwargs.get("HIDDEN_DIM")
+    model = DeepResNetMLP(input_dim=input_dim, num_blocks=num_blocks, hidden_dim=hidden_dim, dropout=dropout)
+    return model.to(device)
