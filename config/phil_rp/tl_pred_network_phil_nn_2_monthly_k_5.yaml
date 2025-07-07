@@ -1,4 +1,5 @@
-_BASE_: "./Base_phil_ts_cfg.yaml"
+NAME: "monthly_k_5_tl_pred"
+_BASE_: "../Base_phil_ts_cfg.yaml"
 TS_FINE_TUNING:
   START: "2004-12-31"
   END: "2024-11-30"

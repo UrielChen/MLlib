@@ -1,4 +1,4 @@
-_BASE_: "./Base_phil_cfg.yaml"
+_BASE_: "../Base_phil_cfg.yaml"
 MODEL:
   NAME: "phil_rp_shallow_network_1"
   INPUT_DIM: 10

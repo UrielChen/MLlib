@@ -3,6 +3,8 @@ from .config import CfgNode
 _C = CfgNode()
 # Consumers can get config by:
 cfg = _C
+_C.NAME = "default"
+
 """ Follow commont steps to config a experiment:
 step 1 : prepare dataset
 step 2 : build a dataloader

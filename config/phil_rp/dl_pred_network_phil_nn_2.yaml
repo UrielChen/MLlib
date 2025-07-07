@@ -1,0 +1,25 @@
+_BASE_: "../Base_phil_cfg.yaml"
+MODEL:
+  NAME: "phil_nn_2"
+  INPUT_DIM: 10
+  DROPOUT: 0.2
+TRAIN:
+  TRAINER: "PhilNNTrainer"
+  MAX_EPOCH: 20
+  OUTPUT_DIR: "results/phil_rp/pretraining/"
+  TRAIN_ONLY: False
+  LOG_INTERVAL: 20
+  IS_VALIDATE: True
+  VALID_INTERVAL: 4
+  SAVE_LAST: True
+DATA:
+  TRAIN_DATA_DIR: "./dataset/phil_rp/empirical_ts/num_portfolio_49_freq_M_k_5/rebalance_freq_1M/out_of_sample/train_sample/"
+  VALID_DATA_DIR: "./dataset/phil_rp/empirical_ts/num_portfolio_49_freq_M_k_5/rebalance_freq_1M/out_of_sample/valid_sample/"
+  TEST_DATA_DIR: "./dataset/phil_rp/empirical_ts/num_portfolio_49_freq_M_k_5/rebalance_freq_1M/out_of_sample/test_sample/"
+  TRAIN_DATA: ""
+  VALID_DATA: ""
+  TEST_DATA: ""
+SOLVER:
+  SCHEDULER: "multi_step_scale"  # multi_step_scale,
+  PATIENCE: 5
+  MILESTONE: [5, 10, 18]

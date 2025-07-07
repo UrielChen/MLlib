@@ -26,5 +26,5 @@ def main():
 
 if __name__ == "__main__":
     import sys
-    sys.argv = ["run.py", "-c", "config/phil_rp/monthly_k_5.yaml"]
+    sys.argv = ["run.py", "-c", "config/phil_rp/tl_pred_network_phil_nn_2_monthly_k_5.yaml"]
     main()
