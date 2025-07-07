@@ -10,7 +10,7 @@ TRAIN:
   MAX_EPOCH: 10
   OUTPUT_DIR: "results/phil_rp/pretraining/"
   TRAIN_ONLY: True
-  LOG_INTERVAL: 20
+  LOG_INTERVAL: 200
   IS_VALIDATE: True
   VALID_INTERVAL: 4
   SAVE_LAST: True
