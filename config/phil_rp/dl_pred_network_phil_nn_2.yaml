@@ -13,6 +13,8 @@ TRAIN:
   VALID_INTERVAL: 4
   SAVE_LAST: True
 DATA:
+  FINE_TUNING_MAIN_DATA: "./dataset/phil_rp/empirical_ts/train/main_fine_tuning.npy"
+  FINE_TUNING_LOAD_MODE: "refresh"
   TRAIN_DATA_DIR: "./dataset/phil_rp/empirical_ts/num_portfolio_49_freq_M_k_5/rebalance_freq_1M/out_of_sample/train_sample/"
   VALID_DATA_DIR: "./dataset/phil_rp/empirical_ts/num_portfolio_49_freq_M_k_5/rebalance_freq_1M/out_of_sample/valid_sample/"
   TEST_DATA_DIR: "./dataset/phil_rp/empirical_ts/num_portfolio_49_freq_M_k_5/rebalance_freq_1M/out_of_sample/test_sample/"
