@@ -12,7 +12,7 @@ class TimeSeriesFineTuningData(Dataset):
         self.data = None
         self.fine_tuning_main_data = None
         self.fine_tuning_load_mode = cfg.DATA.FINE_TUNING_LOAD_MODE
-        assert self.fine_tuning_load_mode  in ["refresh", "full_period", "incremental"]
+        assert self.fine_tuning_load_mode in ["refresh", "full_period", "incremental"]
 
         if mode == "train":
             self.file_dir = cfg.DATA.TRAIN_DATA_DIR

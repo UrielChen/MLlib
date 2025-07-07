@@ -6,7 +6,7 @@ MODEL:
 TRAIN:
   TRAINER: "PhilNNTrainer"
   MAX_EPOCH: 20
-  OUTPUT_DIR: "results/phil_rp/pretraining/"
+  OUTPUT_DIR: "results/phil_rp/pure_deep_learning/"
   TRAIN_ONLY: False
   LOG_INTERVAL: 20
   IS_VALIDATE: True
