@@ -6,7 +6,7 @@ MODEL:
 TRAIN:
   TRAINER: "PhilNNTrainer"
   MAX_EPOCH: 20
-  OUTPUT_DIR: "results/FactorModelMain/pre_training/n_assets_49/n_components_5/delta_0.01_t_140000_seed_1024"
+  OUTPUT_DIR: "results/FactorModelMain/pre_training/n_assets_49/n_components_5/delta_0.01_t_140000_seed_1024/phil_nn_2"
   TRAIN_ONLY: True
   LOG_INTERVAL: 20
   IS_VALIDATE: True
