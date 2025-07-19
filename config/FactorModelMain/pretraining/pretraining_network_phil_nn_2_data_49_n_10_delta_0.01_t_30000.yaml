@@ -1,4 +1,4 @@
-_BASE_: "../Base_phil_cfg.yaml"
+_BASE_: "../../Base_phil_cfg.yaml"
 MODEL:
   NAME: "phil_nn_2"
   INPUT_DIM: 20
