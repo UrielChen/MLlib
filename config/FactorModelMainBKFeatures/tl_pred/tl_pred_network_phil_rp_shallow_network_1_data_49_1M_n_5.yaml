@@ -19,7 +19,7 @@ TRAIN:
   IS_VALIDATE: True
   VALID_INTERVAL: 3
   LOAD_PRETRAIN: True
-  PRETRAINING_PATH: "results/FactorModelMainBKFeatures/pre_training/n_assets_49/n_components_5/delta_0.01_t_450_seed_1024/phil_rp_shallow_network_1/main_pretraining.pkl"
+  PRETRAINING_PATH: "results/FactorModelMainBKFeatures/pre_training/n_assets_49/n_components_5/delta_0.01_t_450_m_10_seed_1024/phil_rp_shallow_network_1/main_pretraining.pkl"
   SAVE_LAST: True
 DATA:
   FINE_TUNING_MAIN_DATA: "./dataset/phil_rp/empirical_ts/train/main_fine_tuning.npy"
