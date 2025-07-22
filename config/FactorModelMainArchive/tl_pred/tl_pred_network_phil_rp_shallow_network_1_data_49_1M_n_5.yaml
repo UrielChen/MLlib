@@ -6,7 +6,7 @@ TS_FINE_TUNING:
   DATE_LIST: "./dataset/FactorModelMain/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M/n_components_5/date_list.csv"
 MODEL:
   NAME: "phil_nn_2"
-  INPUT_DIM: 856
+  INPUT_DIM: 10
   DROPOUT: 0.2
 TEST:
   LOAD_TODAY_MODEL: True
@@ -19,7 +19,7 @@ TRAIN:
   IS_VALIDATE: True
   VALID_INTERVAL: 3
   LOAD_PRETRAIN: True
-  PRETRAINING_PATH: "results/FactorModelMain/pre_training/n_assets_49/n_components_5/delta_0.01_t_450_seed_1024/phil_rp_shallow_network_1/main_pretraining.pkl"
+  PRETRAINING_PATH: "results/FactorModelMain/pre_training/n_assets_49/n_components_5/delta_0.01_t_30000_seed_1024/phil_rp_shallow_network_1/main_pretraining.pkl"
   SAVE_LAST: True
 DATA:
   FINE_TUNING_MAIN_DATA: "./dataset/phil_rp/empirical_ts/train/main_fine_tuning.npy"

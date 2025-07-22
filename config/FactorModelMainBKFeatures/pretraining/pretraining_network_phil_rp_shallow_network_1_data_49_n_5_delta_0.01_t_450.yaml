@@ -1,7 +1,7 @@
 _BASE_: "../../Base_phil_cfg.yaml"
 MODEL:
   NAME: "phil_rp_shallow_network_1"
-  INPUT_DIM: 10
+  INPUT_DIM: 856
   DROPOUT: 0.2
 TRAIN:
   TRAINER: "PhilNNTrainer"
