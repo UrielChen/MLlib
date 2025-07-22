@@ -26,5 +26,5 @@ def main():
 
 if __name__ == "__main__":
     import sys
-    sys.argv = ["run.py", "-c", "config/phil_nn_fine_tuning.yaml", "--train-only"]
+    sys.argv = ["run.py", "-c", "config/FactorModelMain/pretraining/pretraining_network_phil_rp_shallow_network_1_data_49_n_5_delta_0.01_t_450.yaml", "--train-only"]
     main()
