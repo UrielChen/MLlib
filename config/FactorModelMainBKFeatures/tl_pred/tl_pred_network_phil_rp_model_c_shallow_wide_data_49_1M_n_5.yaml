@@ -3,7 +3,7 @@ _BASE_: "../../Base_phil_ts_cfg.yaml"
 TS_FINE_TUNING:
   START: "2004-12-31"
   END: "2024-11-30"
-  DATE_LIST: "./dataset/FactorModelMainBKFeatures/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M/n_components_5/date_list_test.csv"
+  DATE_LIST: "./dataset/FactorModelMainBKFeatures/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M/n_components_5/date_list.csv"
 MODEL:
   NAME: "phil_rp_model_c_deep_narrow"
   INPUT_DIM: 856
