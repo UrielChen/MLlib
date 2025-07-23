@@ -33,6 +33,6 @@ DATA:
 SOLVER:
   SCHEDULER: "multi_step_scale"  # multi_step_scale
   PATIENCE: 5
-  MILESTONE: [1]
+  MILESTONE: [5, 7]
   LR_INIT: 5e-4
   RESET_LR: True
