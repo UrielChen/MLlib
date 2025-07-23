@@ -16,8 +16,10 @@ class TimeSeriesFineTuningData(Dataset):
 
         if mode == "train":
             self.file_dir = cfg.DATA.TRAIN_DATA_DIR
-            self.fine_tuning_main_data = np.load(cfg.DATA.FINE_TUNING_MAIN_DATA)
-            self.fine_tuning_main_data = torch.as_tensor(self.fine_tuning_main_data, dtype=torch.float32)
+            if cfg.DATA.FINE_TUNING_MAIN_DATA != "":
+                self.fine_tuning_main_data = np.load(cfg.DATA.FINE_TUNING_MAIN_DATA)
+                self.fine_tuning_main_data = torch.as_tensor(self.fine_tuning_main_data, dtype=torch.float32)
+
 
         if mode == "valid":
             self.file_dir = cfg.DATA.VALID_DATA_DIR
