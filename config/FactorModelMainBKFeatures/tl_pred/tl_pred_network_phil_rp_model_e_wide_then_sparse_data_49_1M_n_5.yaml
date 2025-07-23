@@ -12,8 +12,8 @@ TEST:
   LOAD_TODAY_MODEL: True
 TRAIN:
   TRAINER: "PhilNNTrainer"
-  MAX_EPOCH: 5
-  OUTPUT_DIR: "results/FactorModelMainBKFeatures/tl_pred/n_assets_49_freq_1M/n_components_5/phil_rp_model_e_wide_then_sparse"
+  MAX_EPOCH: 10
+  OUTPUT_DIR: "results/FactorModelMainBKFeatures/tl_pred/n_assets_49_freq_1M_excess_return/n_components_5/phil_rp_model_e_wide_then_sparse"
   TRAIN_ONLY: False
   LOG_INTERVAL: 50
   IS_VALIDATE: True
@@ -33,5 +33,5 @@ DATA:
 SOLVER:
   SCHEDULER: "multi_step_scale"  # multi_step_scale
   PATIENCE: 5
-  MILESTONE: [5]
+  MILESTONE: [1]
   LR_INIT: 5e-5
