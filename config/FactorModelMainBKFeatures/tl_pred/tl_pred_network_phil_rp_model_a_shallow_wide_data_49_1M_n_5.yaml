@@ -5,7 +5,7 @@ TS_FINE_TUNING:
   END: "2024-11-30"
   DATE_LIST: "./dataset/FactorModelMainBKFeatures/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M/n_components_5/date_list_test.csv"
 MODEL:
-  NAME: "phil_nn_2"
+  NAME: "phil_rp_model_a_shallow_wide"
   INPUT_DIM: 856
   DROPOUT: 0.2
 TEST:
