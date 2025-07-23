@@ -137,3 +137,145 @@ def phil_rp_model_e_wide_then_sparse(cfg=None, **kwargs):
 
 
 
+@NETWORK_REGISTRY.register()
+def phil_rp_model_f_wide_deep(cfg=None, **kwargs):
+    input_dim = cfg.MODEL.INPUT_DIM if cfg else kwargs.get("INPUT_DIM")
+    return DeepResNetMLP(input_dim=input_dim, hidden_dim=128, num_blocks=6, dropout=0.2).to(device)
+
+
+@NETWORK_REGISTRY.register()
+def phil_rp_model_g_wide_shallow(cfg=None, **kwargs):
+    input_dim = cfg.MODEL.INPUT_DIM if cfg else kwargs.get("INPUT_DIM")
+    return DeepResNetMLP(input_dim=input_dim, hidden_dim=128, num_blocks=2, dropout=0.2).to(device)
+
+@NETWORK_REGISTRY.register()
+def phil_rp_model_h_deep_bottleneck(cfg=None, **kwargs):
+    class Model(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.net = nn.Sequential(
+                nn.Linear(856, 128),
+                nn.BatchNorm1d(128),
+                nn.LeakyReLU(),
+                nn.Dropout(0.2),
+                nn.Linear(128, 64),
+                nn.BatchNorm1d(64),
+                nn.LeakyReLU(),
+                nn.Dropout(0.2),
+                nn.Linear(64, 32),
+                nn.BatchNorm1d(32),
+                nn.LeakyReLU(),
+                nn.Dropout(0.2),
+                nn.Linear(32, 64),
+                nn.BatchNorm1d(64),
+                nn.LeakyReLU(),
+                nn.Dropout(0.2),
+                nn.Linear(64, 128),
+                nn.BatchNorm1d(128),
+                nn.LeakyReLU(),
+                nn.Dropout(0.2),
+                nn.Linear(128, 1)
+            )
+        def forward(self, x):
+            return self.net(x)
+    return Model().to(device)
+
+
+@NETWORK_REGISTRY.register()
+def phil_rp_model_i_skip_projection(cfg=None, **kwargs):
+    class Model(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.input_proj = nn.Linear(856, 128)
+            self.bn = nn.BatchNorm1d(128)
+            self.blocks = nn.Sequential(*[ResidualBlock(128, dropout=0.2) for _ in range(4)])
+            self.output = nn.Linear(128 + 128, 1)  # concat input proj + residual output
+
+        def forward(self, x):
+            x_proj = self.bn(self.input_proj(x))
+            h = self.blocks(x_proj)
+            x_cat = torch.cat([x_proj, h], dim=1)
+            return self.output(x_cat)
+    return Model().to(device)
+
+
+
+@NETWORK_REGISTRY.register()
+def phil_rp_model_j_deep_narrow_but_gradual(cfg=None, **kwargs):
+    class Model(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.net = nn.Sequential(
+                nn.Linear(856, 256),
+                nn.BatchNorm1d(256),
+                nn.LeakyReLU(),
+                nn.Dropout(0.2),
+                nn.Linear(256, 64),
+                nn.BatchNorm1d(64),
+                nn.LeakyReLU(),
+                nn.Dropout(0.2),
+                nn.Linear(64, 16),
+                nn.BatchNorm1d(16),
+                nn.LeakyReLU(),
+                nn.Dropout(0.2),
+                nn.Linear(16, 1)
+            )
+        def forward(self, x):
+            return self.net(x)
+    return Model().to(device)
+
+
+@NETWORK_REGISTRY.register()
+def phil_rp_model_k_stack_residual_and_dense(cfg=None, **kwargs):
+    class Model(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.input = nn.Linear(856, 64)
+            self.bn = nn.BatchNorm1d(64)
+            self.blocks = nn.Sequential(
+                ResidualBlock(64, dropout=0.2),
+                ResidualBlock(64, dropout=0.2)
+            )
+            self.head = nn.Sequential(
+                nn.Linear(64, 32),
+                nn.LeakyReLU(),
+                nn.Linear(32, 1)
+            )
+
+        def forward(self, x):
+            x = self.bn(self.input(x))
+            x = self.blocks(x)
+            return self.head(x)
+    return Model().to(device)
+
+
+
+@NETWORK_REGISTRY.register()
+def phil_rp_model_l_symmetric_autoencoder(cfg=None, **kwargs):
+    class Model(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.net = nn.Sequential(
+                nn.Linear(856, 256),
+                nn.BatchNorm1d(256),
+                nn.ReLU(),
+                nn.Dropout(0.2),
+                nn.Linear(256, 64),
+                nn.ReLU(),
+                nn.Dropout(0.2),
+                nn.Linear(64, 16),
+                nn.ReLU(),
+                nn.Dropout(0.2),
+                nn.Linear(16, 64),
+                nn.ReLU(),
+                nn.Dropout(0.2),
+                nn.Linear(64, 256),
+                nn.ReLU(),
+                nn.Dropout(0.2),
+                nn.Linear(256, 1)
+            )
+        def forward(self, x):
+            return self.net(x)
+    return Model().to(device)
+
+
