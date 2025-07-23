@@ -35,3 +35,4 @@ SOLVER:
   PATIENCE: 5
   MILESTONE: [1]
   LR_INIT: 5e-5
+  RESET_LR: True
