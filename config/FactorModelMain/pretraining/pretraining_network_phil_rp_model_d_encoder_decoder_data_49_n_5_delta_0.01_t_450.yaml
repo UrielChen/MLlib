@@ -1,12 +1,12 @@
 _BASE_: "../../Base_phil_cfg.yaml"
 MODEL:
-  NAME: "phil_rp_shallow_network_1"
+  NAME: "phil_rp_model_d_encoder_decoder"
   INPUT_DIM: 10
   DROPOUT: 0.2
 TRAIN:
   TRAINER: "PhilNNTrainer"
   MAX_EPOCH: 10
-  OUTPUT_DIR: "results/FactorModelMain/pre_training/n_assets_49/n_components_5/delta_0.01_t_450_m_10_seed_1024/phil_rp_shallow_network_1"
+  OUTPUT_DIR: "results/FactorModelMain/pre_training/n_assets_49/n_components_5/delta_0.01_t_450_m_10_seed_1024/phil_rp_model_d_encoder_decoder"
   TRAIN_ONLY: True
   LOG_INTERVAL: 20
   IS_VALIDATE: True

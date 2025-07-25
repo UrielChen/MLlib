@@ -13,7 +13,7 @@ TEST:
 TRAIN:
   TRAINER: "PhilNNTrainer"
   MAX_EPOCH: 5
-  OUTPUT_DIR: "results/FactorModelMain/tl_pred/n_assets_49_freq_1M/n_components_5/phil_rp_shallow_network_1"
+  OUTPUT_DIR: "results/FactorModelMain/tl_pred/n_assets_49_freq_1M_excess_return/n_components_5/phil_rp_shallow_network_1"
   TRAIN_ONLY: False
   LOG_INTERVAL: 50
   IS_VALIDATE: True
@@ -24,9 +24,9 @@ TRAIN:
 DATA:
   FINE_TUNING_MAIN_DATA: "./dataset/phil_rp/empirical_ts/train/main_fine_tuning.npy"
   FINE_TUNING_LOAD_MODE: "refresh"
-  TRAIN_DATA_DIR: "./dataset/FactorModelMain/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M/n_components_5/train_sample/"
-  VALID_DATA_DIR: "./dataset/FactorModelMain/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M/n_components_5/valid_sample/"
-  TEST_DATA_DIR: "./dataset/FactorModelMain/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M/n_components_5/test_sample/"
+  TRAIN_DATA_DIR: "./dataset/FactorModelMain/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M_excess_return/n_components_5/train_sample/"
+  VALID_DATA_DIR: "./dataset/FactorModelMain/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M_excess_return/n_components_5/valid_sample/"
+  TEST_DATA_DIR: "./dataset/FactorModelMain/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M_excess_return/n_components_5/test_sample/"
   TRAIN_DATA: ""
   VALID_DATA: ""
   TEST_DATA: ""
