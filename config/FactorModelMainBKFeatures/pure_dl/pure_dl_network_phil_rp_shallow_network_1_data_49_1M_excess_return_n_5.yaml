@@ -13,7 +13,7 @@ TEST:
 TRAIN:
   TRAINER: "PhilNNTrainer"
   MAX_EPOCH: 10
-  OUTPUT_DIR: "results/FactorModelMainBKFeatures/tl_pred/n_assets_49_freq_1M_excess_return/n_components_5/phil_rp_shallow_network_1"
+  OUTPUT_DIR: "results/FactorModelMainBKFeatures/pure_dl/n_assets_49_freq_1M_excess_return/n_components_5/phil_rp_shallow_network_1"
   TRAIN_ONLY: False
   LOG_INTERVAL: 50
   IS_VALIDATE: True
