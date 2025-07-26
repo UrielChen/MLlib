@@ -17,7 +17,7 @@ TRAIN:
   TRAIN_ONLY: False
   LOG_INTERVAL: 50
   IS_VALIDATE: True
-  VALID_INTERVAL: 3
+  VALID_INTERVAL: 2
   LOAD_PRETRAIN: True
   PRETRAINING_PATH: "results/FactorModelMainBKFeatures/pre_training/n_assets_49/n_components_5/delta_0.01_t_450_m_10_seed_1024/phil_rp_model_e_wide_then_sparse/main_pretraining.pkl"
   SAVE_LAST: True
