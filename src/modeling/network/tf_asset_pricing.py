@@ -83,7 +83,7 @@ def phil_rp_model_e_wide_then_sparse(cfg=None, **kwargs):
     return Model().to(device)
 
 
-
+@NETWORK_REGISTRY.register()
 def phil_rp_model_e_moderate_wide_then_sparse(cfg=None, **kwargs):
     class Model(nn.Module):
         def __init__(self):
@@ -109,6 +109,7 @@ def phil_rp_model_e_moderate_wide_then_sparse(cfg=None, **kwargs):
 
     return Model().to(device)
 
+@NETWORK_REGISTRY.register()
 def phil_rp_model_e_huge_wide_then_sparse(cfg=None, **kwargs):
     class Model(nn.Module):
         def __init__(self):
