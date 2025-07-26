@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Run all commands sequentially
+python run_ts_fine_tuning.py -c config/FactorModelMainBKFeatures/pure_dl/pure_dl_network_phil_rp_model_a_shallow_wide_data_49_1M_excess_return_n_5.yaml &
+python run_ts_fine_tuning.py -c config/FactorModelMainBKFeatures/pure_dl/pure_dl_network_phil_rp_model_b_moderate_depth_data_49_1M_excess_return_n_5.yaml &
+python run_ts_fine_tuning.py -c config/FactorModelMainBKFeatures/pure_dl/pure_dl_network_phil_rp_model_c_deep_narrow_data_49_1M_excess_return_n_5.yaml &
+python run_ts_fine_tuning.py -c config/FactorModelMainBKFeatures/pure_dl/pure_dl_network_phil_rp_model_d_encoder_decoder_data_49_1M_excess_return_n_5.yaml &
+python run_ts_fine_tuning.py -c config/FactorModelMainBKFeatures/pure_dl/pure_dl_network_phil_rp_model_e_wide_then_sparse_data_49_1M_excess_return_n_5.yaml &
+python run_ts_fine_tuning.py -c config/FactorModelMainBKFeatures/pure_dl/pure_dl_network_phil_rp_model_f_wide_deep_data_49_1M_excess_return_n_5.yaml &
+python run_ts_fine_tuning.py -c config/FactorModelMainBKFeatures/pure_dl/pure_dl_network_phil_rp_model_g_wide_shallow_data_49_1M_excess_return_n_5.yaml &
+
+
+
