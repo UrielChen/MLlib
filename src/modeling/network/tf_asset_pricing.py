@@ -36,29 +36,29 @@ class DeepResNetMLP(nn.Module):
         x = self.output_layer(x)
         return x
 
-class TmpResidualBlock(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.linear1 = nn.Linear(64, 32)
-        self.linear2 = nn.Linear(32, 64)
-        self.bn1 = nn.BatchNorm1d(32)
-        self.bn2 = nn.BatchNorm1d(64)
-        self.relu = nn.ReLU()
-        self.dropout = nn.Dropout(0.2)
-
-    def forward(self, x):
-        identity = x
-        out = self.linear1(x)
-        out = self.bn1(out)
-        out = self.relu(out)
-        out = self.dropout(out)
-        out = self.linear2(out)
-        out = self.bn2(out)
-        out = self.dropout(out)
-        return self.relu(out + identity)
-
 @NETWORK_REGISTRY.register()
 def phil_rp_model_e_wide_then_sparse(cfg=None, **kwargs):
+    class TmpResidualBlock(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.linear1 = nn.Linear(20, 5)
+            self.linear2 = nn.Linear(5, 20)
+            self.bn1 = nn.BatchNorm1d(5)
+            self.bn2 = nn.BatchNorm1d(20)
+            self.relu = nn.ReLU()
+            self.dropout = nn.Dropout(0.2)
+
+        def forward(self, x):
+            identity = x
+            out = self.linear1(x)
+            out = self.bn1(out)
+            out = self.relu(out)
+            out = self.dropout(out)
+            out = self.linear2(out)
+            out = self.bn2(out)
+            out = self.dropout(out)
+            return self.relu(out + identity)
+
     class Model(nn.Module):
         def __init__(self):
             super().__init__()
@@ -85,6 +85,27 @@ def phil_rp_model_e_wide_then_sparse(cfg=None, **kwargs):
 
 @NETWORK_REGISTRY.register()
 def phil_rp_model_e_moderate_wide_then_sparse(cfg=None, **kwargs):
+    class TmpResidualBlock(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.linear1 = nn.Linear(64, 32)
+            self.linear2 = nn.Linear(32, 64)
+            self.bn1 = nn.BatchNorm1d(32)
+            self.bn2 = nn.BatchNorm1d(64)
+            self.relu = nn.ReLU()
+            self.dropout = nn.Dropout(0.2)
+
+        def forward(self, x):
+            identity = x
+            out = self.linear1(x)
+            out = self.bn1(out)
+            out = self.relu(out)
+            out = self.dropout(out)
+            out = self.linear2(out)
+            out = self.bn2(out)
+            out = self.dropout(out)
+            return self.relu(out + identity)
+
     class Model(nn.Module):
         def __init__(self):
             super().__init__()
@@ -111,6 +132,27 @@ def phil_rp_model_e_moderate_wide_then_sparse(cfg=None, **kwargs):
 
 @NETWORK_REGISTRY.register()
 def phil_rp_model_e_huge_wide_then_sparse(cfg=None, **kwargs):
+    class TmpResidualBlock(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.linear1 = nn.Linear(128, 64)
+            self.linear2 = nn.Linear(64, 128)
+            self.bn1 = nn.BatchNorm1d(64)
+            self.bn2 = nn.BatchNorm1d(128)
+            self.relu = nn.ReLU()
+            self.dropout = nn.Dropout(0.3)
+
+        def forward(self, x):
+            identity = x
+            out = self.linear1(x)
+            out = self.bn1(out)
+            out = self.relu(out)
+            out = self.dropout(out)
+            out = self.linear2(out)
+            out = self.bn2(out)
+            out = self.dropout(out)
+            return self.relu(out + identity)
+
     class Model(nn.Module):
         def __init__(self):
             super().__init__()

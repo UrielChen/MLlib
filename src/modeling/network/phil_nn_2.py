@@ -107,6 +107,53 @@ def phil_rp_model_d_encoder_decoder(cfg=None, **kwargs):
             return self.net(x)
     return Model().to(device)
 
+@NETWORK_REGISTRY.register()
+def phil_rp_model_e_wide_then_sparse(cfg=None, **kwargs):
+    class TmpResidualBlock(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.linear1 = nn.Linear(20, 5)
+            self.linear2 = nn.Linear(5, 20)
+            self.bn1 = nn.BatchNorm1d(5)
+            self.bn2 = nn.BatchNorm1d(20)
+            self.relu = nn.ReLU()
+            self.dropout = nn.Dropout(0.2)
+
+        def forward(self, x):
+            identity = x
+            out = self.linear1(x)
+            out = self.bn1(out)
+            out = self.relu(out)
+            out = self.dropout(out)
+            out = self.linear2(out)
+            out = self.bn2(out)
+            out = self.dropout(out)
+            return self.relu(out + identity)
+
+    class Model(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.input = nn.Sequential(
+                nn.Linear(856, 20),
+                nn.BatchNorm1d(20),
+                nn.ReLU(),
+                nn.Dropout(0.2)
+            )
+            self.blocks = nn.Sequential(
+                TmpResidualBlock(),
+                TmpResidualBlock()
+            )
+            self.output = nn.Linear(20, 1)
+
+        def forward(self, x):
+            x = self.input(x)
+            x = self.blocks(x)
+            x = self.output(x)
+            return x
+
+    return Model().to(device)
+
+
 
 @NETWORK_REGISTRY.register()
 def phil_rp_model_f_wide_deep(cfg=None, **kwargs):
