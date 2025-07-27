@@ -11,6 +11,7 @@ from src.checkpoint.save import resume_training, load_model, load_pretrained, sa
 from src.tools.logger import make_logger
 import numpy as np
 import pandas as pd
+from utils.phil_test import phil_test_main
 
 
 class FTConstructor:
@@ -145,6 +146,7 @@ class TSFineTuningRunner(FTConstructor):
         ##############
         self.logger.info(f"On Test, date: {date}")
         if cfg.LOAD_TODAY_MODEL:
+
             weight_file = os.path.join(self.model_dir, f"{date}.pkl")
             self.logger.info(f"test with model on date {date} at {weight_file}")
             self.model = load_model(self.model, weight_file)
@@ -221,8 +223,19 @@ class TSFineTuningRunner(FTConstructor):
                 self.test(date)
             else:
                 raise ValueError()
+
+            self.clean_up()
+
+            if self.cfg.TRAIN.LOAD_PRETRAIN:
+                self.model = load_pretrained(self.cfg.PRETRAINING_PATH, self.model)
+
         np.save(Path(self.log_dir, "total_pred.npy"), self.total_pred)
         np.save(Path(self.log_dir, "total_targets.npy"), self.total_targets)
+        phil_test_main(self.log_dir, self.total_pred, self.total_targets, 49)
 
-
-# todo, everyday, save a model(train), load this model(test) and perform test.
+    def clean_up(self):
+        import torch, gc
+        torch.cuda.empty_cache()
+        gc.collect()
+        self.collector = TrainSummary()
+        self.trainer = self.build_trainer()
