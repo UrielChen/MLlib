@@ -66,11 +66,11 @@ class TrainSummary:
         self.update_epoch_valid_acc(acc_valid)
 
     def record_valid_mae(self, mae_valid):
-        self.batch_loss["train"].append(mae_valid)
+        self.batch_loss["valid"].append(mae_valid)
         self.update_epoch_valid_mae(mae_valid)
 
     def record_valid_mse(self, mse_valid):
-        self.batch_loss["train"].append(mse_valid)
+        self.batch_loss["valid"].append(mse_valid)
         self.update_epoch_valid_mse(mse_valid)
 
     @property
