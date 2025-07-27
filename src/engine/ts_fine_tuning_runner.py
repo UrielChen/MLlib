@@ -228,6 +228,11 @@ class TSFineTuningRunner(FTConstructor):
 
             if self.cfg.TRAIN.LOAD_PRETRAIN:
                 self.model = load_pretrained(self.cfg.PRETRAINING_PATH, self.model)
+            else:
+                self.model = build_model(self.cfg)
+
+            self.optimizer = build_solver(self.cfg, self.model)
+            self.scheduler = build_scheduler(self.cfg, self.optimizer)
 
         np.save(Path(self.log_dir, "total_pred.npy"), self.total_pred)
         np.save(Path(self.log_dir, "total_targets.npy"), self.total_targets)
