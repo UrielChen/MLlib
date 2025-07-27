@@ -26,5 +26,5 @@ def main():
 
 if __name__ == "__main__":
     import sys
-    sys.argv = ["run_ts_fine_tuning_ide.py", "-c", "config/FactorModelMain/tl_pred_network_phil_nn_2_data_49_1M_n_5_test_lr5e-5.yaml"]
+    sys.argv = ["run_ts_fine_tuning_ide.py", "-c", "config/FactorModelMainBKFeatures/pure_dl/pure_dl_network_new_model_b_data_49_1M_excess_return_n_5.yaml"]
     main()
