@@ -5,7 +5,7 @@ MODEL:
   DROPOUT: 0.2
 TRAIN:
   TRAINER: "PhilNNTrainer"
-  MAX_EPOCH: 20
+  MAX_EPOCH: 30
   OUTPUT_DIR: "results/RPBKFeatures/pre_training/n_assets_49/n_components_5/delta_0.01_t_450_m_10_seed_1024/phil_rp_model_e_wide_then_sparse"
   TRAIN_ONLY: True
   LOG_INTERVAL: 20
@@ -19,4 +19,5 @@ DATA:
 SOLVER:
   SCHEDULER: "multi_step_scale"  # multi_step_scale,
   PATIENCE: 5
-  MILESTONE: [5, 10, 18]
+  MILESTONE: [10, 15, 20, 24, 28]
+  LR_INIT: 1e-2
