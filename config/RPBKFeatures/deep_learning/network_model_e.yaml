@@ -24,9 +24,9 @@ TRAIN:
 DATA:
   FINE_TUNING_MAIN_DATA: ""
   FINE_TUNING_LOAD_MODE: "refresh"
-  TRAIN_DATA_DIR: "./dataset/ResearchProjectModified/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M_excess_return/n_components_5/train_sample/"
-  VALID_DATA_DIR: "./dataset/ResearchProjectModified/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M_excess_return/n_components_5/valid_sample/"
-  TEST_DATA_DIR: "./dataset/ResearchProjectModified/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M_excess_return/n_components_5/test_sample/"
+  TRAIN_DATA_DIR: "./dataset/RPBKFeatures/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M_excess_return/n_components_5/train_sample/"
+  VALID_DATA_DIR: "./dataset/RPBKFeatures/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M_excess_return/n_components_5/valid_sample/"
+  TEST_DATA_DIR: "./dataset/RPBKFeatures/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M_excess_return/n_components_5/test_sample/"
   TRAIN_DATA: ""
   VALID_DATA: ""
   TEST_DATA: ""

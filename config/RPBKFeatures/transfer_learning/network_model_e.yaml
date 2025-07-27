@@ -13,20 +13,20 @@ TEST:
 TRAIN:
   TRAINER: "PhilNNTrainer"
   MAX_EPOCH: 10
-  OUTPUT_DIR: "results/ResearchProjectModified/tl_pred/n_assets_49_freq_1M_excess_return/n_components_5/phil_rp_model_e_wide_then_sparse"
+  OUTPUT_DIR: "results/RPBKFeatures/tl_pred/n_assets_49_freq_1M_excess_return/n_components_5/phil_rp_model_e_wide_then_sparse"
   TRAIN_ONLY: False
   LOG_INTERVAL: 50
   IS_VALIDATE: True
   VALID_INTERVAL: 3
   LOAD_PRETRAIN: True
-  PRETRAINING_PATH: "results/ResearchProjectModified/pre_training/n_assets_49/n_components_5/delta_0.01_t_450_m_10_seed_1024/phil_rp_model_e_wide_then_sparse/main_pretraining.pkl"
+  PRETRAINING_PATH: "results/RPBKFeatures/pre_training/n_assets_49/n_components_5/delta_0.01_t_450_m_10_seed_1024/phil_rp_model_e_wide_then_sparse/main_pretraining.pkl"
   SAVE_LAST: True
 DATA:
   FINE_TUNING_MAIN_DATA: ""
   FINE_TUNING_LOAD_MODE: "refresh"
-  TRAIN_DATA_DIR: "./dataset/ResearchProjectModified/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M_excess_return/n_components_5/train_sample/"
-  VALID_DATA_DIR: "./dataset/ResearchProjectModified/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M_excess_return/n_components_5/valid_sample/"
-  TEST_DATA_DIR: "./dataset/ResearchProjectModified/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M_excess_return/n_components_5/test_sample/"
+  TRAIN_DATA_DIR: "./dataset/RPBKFeatures/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M_excess_return/n_components_5/train_sample/"
+  VALID_DATA_DIR: "./dataset/RPBKFeatures/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M_excess_return/n_components_5/valid_sample/"
+  TEST_DATA_DIR: "./dataset/RPBKFeatures/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M_excess_return/n_components_5/test_sample/"
   TRAIN_DATA: ""
   VALID_DATA: ""
   TEST_DATA: ""
