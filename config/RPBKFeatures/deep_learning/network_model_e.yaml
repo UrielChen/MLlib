@@ -3,7 +3,7 @@ _BASE_: "../../Base/Base_phil_ts_cfg.yaml"
 TS_FINE_TUNING:
   START: "2004-12-31"
   END: "2024-11-30"
-  DATE_LIST: "./dataset/ResearchProjectModified/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M_excess_return/n_components_5/date_list.csv"
+  DATE_LIST: "./dataset/RPBKFeatures/empirical_dynamic_data/out_of_sample/n_assets_49_freq_1M_excess_return/n_components_5/date_list.csv"
 MODEL:
   NAME: "phil_rp_model_e_wide_then_sparse"
   INPUT_DIM: 857
@@ -13,7 +13,7 @@ TEST:
 TRAIN:
   TRAINER: "PhilNNTrainer"
   MAX_EPOCH: 20
-  OUTPUT_DIR: "results/ResearchProjectModified/pure_dl/n_assets_49_freq_1M_excess_return/n_components_5/phil_rp_model_e_wide_then_sparse"
+  OUTPUT_DIR: "results/RPBKFeatures/pure_dl/n_assets_49_freq_1M_excess_return/n_components_5/phil_rp_model_e_wide_then_sparse"
   TRAIN_ONLY: False
   LOG_INTERVAL: 30
   IS_VALIDATE: True
