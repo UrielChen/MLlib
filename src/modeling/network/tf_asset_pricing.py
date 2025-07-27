@@ -63,7 +63,7 @@ def phil_rp_model_e_wide_then_sparse(cfg=None, **kwargs):
         def __init__(self):
             super().__init__()
             self.input = nn.Sequential(
-                nn.Linear(856, 20),
+                nn.Linear(cfg.MODEL.INPUT_DIM, 20),
                 nn.BatchNorm1d(20),
                 nn.ReLU(),
                 nn.Dropout(0.2)
@@ -110,7 +110,7 @@ def phil_rp_model_e_moderate_wide_then_sparse(cfg=None, **kwargs):
         def __init__(self):
             super().__init__()
             self.input = nn.Sequential(
-                nn.Linear(856, 64),
+                nn.Linear(cfg.MODEL.INPUT_DIM, 64),
                 nn.BatchNorm1d(64),
                 nn.ReLU(),
                 nn.Dropout(0.2)
@@ -157,7 +157,7 @@ def phil_rp_model_e_huge_wide_then_sparse(cfg=None, **kwargs):
         def __init__(self):
             super().__init__()
             self.input = nn.Sequential(
-                nn.Linear(856, 128),
+                nn.Linear(cfg.MODEL.INPUT_DIM, 128),
                 nn.BatchNorm1d(128),
                 nn.ReLU(),
                 nn.Dropout(0.3)

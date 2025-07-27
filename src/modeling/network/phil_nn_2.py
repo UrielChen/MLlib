@@ -92,7 +92,7 @@ def phil_rp_model_d_encoder_decoder(cfg=None, **kwargs):
         def __init__(self):
             super().__init__()
             self.net = nn.Sequential(
-                nn.Linear(856, 24),
+                nn.Linear(cfg.MODEL.INPUT_DIM, 24),
                 nn.ReLU(),
                 nn.Dropout(0.2),
                 nn.Linear(24, 6),
@@ -125,7 +125,7 @@ def phil_rp_model_h_deep_bottleneck(cfg=None, **kwargs):
         def __init__(self):
             super().__init__()
             self.net = nn.Sequential(
-                nn.Linear(856, 128),
+                nn.Linear(cfg.MODEL.INPUT_DIM, 128),
                 nn.BatchNorm1d(128),
                 nn.LeakyReLU(),
                 nn.Dropout(0.2),
@@ -157,7 +157,7 @@ def phil_rp_model_i_skip_projection(cfg=None, **kwargs):
     class Model(nn.Module):
         def __init__(self):
             super().__init__()
-            self.input_proj = nn.Linear(856, 128)
+            self.input_proj = nn.Linear(cfg.MODEL.INPUT_DIM, 128)
             self.bn = nn.BatchNorm1d(128)
             self.blocks = nn.Sequential(*[ResidualBlock(128, dropout=0.2) for _ in range(4)])
             self.output = nn.Linear(128 + 128, 1)  # concat input proj + residual output
@@ -177,7 +177,7 @@ def phil_rp_model_j_deep_narrow_but_gradual(cfg=None, **kwargs):
         def __init__(self):
             super().__init__()
             self.net = nn.Sequential(
-                nn.Linear(856, 256),
+                nn.Linear(cfg.MODEL.INPUT_DIM, 256),
                 nn.BatchNorm1d(256),
                 nn.LeakyReLU(),
                 nn.Dropout(0.2),
@@ -201,7 +201,7 @@ def phil_rp_model_k_stack_residual_and_dense(cfg=None, **kwargs):
     class Model(nn.Module):
         def __init__(self):
             super().__init__()
-            self.input = nn.Linear(856, 64)
+            self.input = nn.Linear(cfg.MODEL.INPUT_DIM, 64)
             self.bn = nn.BatchNorm1d(64)
             self.blocks = nn.Sequential(
                 ResidualBlock(64, dropout=0.2),
@@ -227,7 +227,7 @@ def phil_rp_model_l_symmetric_autoencoder(cfg=None, **kwargs):
         def __init__(self):
             super().__init__()
             self.net = nn.Sequential(
-                nn.Linear(856, 256),
+                nn.Linear(cfg.MODEL.INPUT_DIM, 256),
                 nn.BatchNorm1d(256),
                 nn.ReLU(),
                 nn.Dropout(0.2),
