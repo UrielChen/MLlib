@@ -85,7 +85,7 @@ class SimpleRegressionTrainer(Trainer):
                 # all_preds.append(preds.cpu())  # phil_todo, here i store the validation result
                 # all_targets.append(targets.cpu())
             mae_epo_mean = np.array(mae_batch_list).mean()
-            mse_epo_mean = np.array(mae_batch_list).mean()
+            mse_epo_mean = np.array(mse_batch_list).mean()
             self.tb_writer.add_scalar("valid_mae", mae_epo_mean, epoch_idx)
             self.tb_writer.add_scalar("valid_mse", mse_epo_mean, epoch_idx)
 

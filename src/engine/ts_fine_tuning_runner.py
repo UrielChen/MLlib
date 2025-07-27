@@ -90,11 +90,21 @@ class TSFineTuningRunner(FTConstructor):
             self.model = load_pretrained(cfg.PRETRAINING_PATH, self.model)
 
         if self.cfg.SOLVER.RESET_LR:
-            self.logger.info("change learning rate form [{}] to [{}]".format(
-                self.optimizer.param_groups[0]["lr"],
-                self.cfg.SOLVER.LR_INIT,
-            ))
-            self.optimizer.param_groups[0]["lr"] = self.cfg.SOLVER.LR_INIT
+            # self.logger.info("change learning rate form [{}] to [{}]".format(
+            #     self.optimizer.param_groups[0]["lr"],
+            #     self.cfg.SOLVER.LR_INIT,
+            # ))
+            # self.optimizer.param_groups[0]["lr"] = self.cfg.SOLVER.LR_INIT
+
+            self.logger.info("Resetting LR and scheduler")
+
+            # Manually set LR
+            for param_group in self.optimizer.param_groups:
+                param_group["lr"] = self.cfg.SOLVER.LR_INIT
+
+            # Rebuild scheduler
+            self.scheduler = build_scheduler(self.cfg, self.optimizer)
+
 
         self.data_loader["train"].dataset.update(date)
         if cfg.IS_VALIDATE:
