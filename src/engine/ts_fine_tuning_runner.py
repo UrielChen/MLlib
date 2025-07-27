@@ -108,7 +108,6 @@ class TSFineTuningRunner(FTConstructor):
                 self.trainer.valid(self.data_loader["valid"], self.model, self.loss_f, epoch)
 
             self.scheduler.step()
-            print(self.optimizer.param_groups[0]["lr"])
             if self.collector.model_save and epoch % cfg.VALID_INTERVAL == 0:
                 self.model_dir.mkdir(parents=True, exist_ok=True)
 
