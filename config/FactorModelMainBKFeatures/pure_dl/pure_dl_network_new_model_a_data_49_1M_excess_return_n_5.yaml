@@ -12,7 +12,7 @@ TEST:
   LOAD_TODAY_MODEL: True
 TRAIN:
   TRAINER: "PhilNNTrainer"
-  MAX_EPOCH: 10
+  MAX_EPOCH: 20
   OUTPUT_DIR: "results/FactorModelMainBKFeatures/pure_dl/n_assets_49_freq_1M_excess_return/n_components_5/new_model_a_bottleneck_deep_wide"
   TRAIN_ONLY: False
   LOG_INTERVAL: 50
@@ -33,6 +33,6 @@ DATA:
 SOLVER:
   SCHEDULER: "multi_step_scale"  # multi_step_scale
   PATIENCE: 5
-  MILESTONE: [5, 7]
-  LR_INIT: 5e-4
+  MILESTONE: [4, 8, 12, 16]
+  LR_INIT: 5e-3
   RESET_LR: True
