@@ -1,7 +1,7 @@
 _BASE_: "../../Base/Base_phil_cfg.yaml"
 MODEL:
   NAME: "phil_rp_model_e_wide_then_sparse"
-  INPUT_DIM: 856
+  INPUT_DIM: 857
   DROPOUT: 0.2
 TRAIN:
   TRAINER: "PhilNNTrainer"
