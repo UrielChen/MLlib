@@ -1,9 +1,0 @@
-_BASE_: "./Base_ubk_cfg.yaml"
-MODEL:
-  NAME: "mlp_model"
-SOLVER:
-  LR_INIT: 0.001
-TRAIN:
-  TRAINER: "SimpleTrainer"
-  MAX_EPOCH: 50
-  OUTPUT_DIR: "results/mlp/"

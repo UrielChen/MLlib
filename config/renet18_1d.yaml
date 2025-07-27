@@ -1,7 +1,0 @@
-_BASE_: "./Base_ubk_cfg.yaml"
-MODEL:
-  NAME: "resnet18_1d"
-TRAIN:
-  TRAINER: "ConvTrainer"
-  MAX_EPOCH: 50
-  OUTPUT_DIR: "results/renet18_1d/"
