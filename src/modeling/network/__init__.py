@@ -11,3 +11,4 @@ from .phil_nn_2 import (
 )
 from .tf_asset_pricing import phil_rp_model_e_wide_then_sparse, phil_rp_model_e_moderate_wide_then_sparse, phil_rp_model_e_huge_wide_then_sparse
 from .renet18_1d import resnet18_1d
+from .new_models import new_model_a_bottleneck_deep_wide, new_model_b_bottleneck_shallow, new_model_c_bottleneck_deep_narrow
