@@ -12,7 +12,7 @@ TEST:
   LOAD_TODAY_MODEL: True
 TRAIN:
   TRAINER: "PhilNNTrainer"
-  MAX_EPOCH: 20
+  MAX_EPOCH: 50
   OUTPUT_DIR: "results/RPBKFeatures/pure_dl/n_assets_49_freq_1M_excess_return/n_components_5/phil_rp_model_e_wide_then_sparse"
   TRAIN_ONLY: False
   LOG_INTERVAL: 30
@@ -33,6 +33,6 @@ DATA:
 SOLVER:
   SCHEDULER: "multi_step_scale"  # multi_step_scale
   PATIENCE: 5
-  MILESTONE: [8, 12, 16]
-  LR_INIT: 5e-3
+  MILESTONE: [20, 30, 40]
+  LR_INIT: 5e-2
   RESET_LR: True
