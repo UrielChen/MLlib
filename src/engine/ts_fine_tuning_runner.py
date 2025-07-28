@@ -227,7 +227,7 @@ class TSFineTuningRunner(FTConstructor):
             self.clean_up()
 
             if self.cfg.TRAIN.LOAD_PRETRAIN:
-                self.model = load_pretrained(self.cfg.PRETRAINING_PATH, self.model)
+                self.model = load_pretrained(self.cfg.TRAIN.PRETRAINING_PATH, self.model)
             else:
                 self.model = build_model(self.cfg)
 
