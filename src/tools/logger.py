@@ -42,7 +42,7 @@ def make_logger(out_dir):
     :return:
     """
     now_time = datetime.now()
-    time_str = datetime.strftime(now_time, '%m-%d_%H-%M')
+    time_str = datetime.strftime(now_time, '%Y-%m-%d_%H:%M:%S')
     log_dir = os.path.join(out_dir, time_str)  # use config time as directory name
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
